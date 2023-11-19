@@ -1,28 +1,24 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import css from './Searchbar.module.css';
 import { FiSearch } from 'react-icons/fi';
 
+const Searchbar = ({ onSubmit }) => {
+  const [query, setQuery] = useState('');
 
-class Searchbar extends Component {
-  state = {
-    query: '',
+  const handleChange = (event) => {
+    setQuery(event.target.value);
   };
 
-  handleChange = (event) => {
-    this.setState({ query: event.target.value });
-  };
-
-  handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    this.props.onSubmit(this.state.query);
-    this.setState({ query: '' });
+    onSubmit(query);
+    setQuery('');
   };
 
-  render() {
-    return (
-      <header className={css.serchbar}>
-        <div className={css.searchhover}>
-        <form className={css.searchform} onSubmit={this.handleSubmit}>
+  return (
+    <header className={css.searchbar}>
+      <div className={css.searchhover}>
+        <form className={css.searchform} onSubmit={handleSubmit}>
           <button className={css.searchformbutton} type="submit">
             <FiSearch size={25} stroke="#3f51b5" />
           </button>
@@ -33,14 +29,13 @@ class Searchbar extends Component {
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
-            value={this.state.query}
-            onChange={this.handleChange}
+            value={query}
+            onChange={handleChange}
           />
-          </form>
-          </div>
-      </header>
-    );
-  }
-}
+        </form>
+      </div>
+    </header>
+  );
+};
 
 export default Searchbar;
