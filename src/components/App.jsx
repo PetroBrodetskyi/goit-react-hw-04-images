@@ -77,10 +77,8 @@ const App = () => {
   };
 
   const openModal = (newLargeImageURL) => {
-    if (!isModalOpen) {
-      setLargeImageURL(newLargeImageURL);
-      setIsModalOpen(true);
-    }
+  setLargeImageURL(newLargeImageURL);
+  setIsModalOpen(true);
   };
 
   const closeModal = () => {
